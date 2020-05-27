@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+
 // malloc
 #include <stdlib.h>
 
@@ -37,7 +38,7 @@ bool load(const char *dictionary)
     }
 
     // ==== start ====
-    // Calc no. of words
+    // Step 2: Calc no. of words
     unsigned int new_line_counter = 0;
     int next_char;
 
@@ -47,25 +48,34 @@ bool load(const char *dictionary)
         if (next_char == '\n')
         {
             new_line_counter++;
+            printf("\n");
         }
+    	else
+        {
+            printf("%c", next_char); 
+        }
+	
     }
 
     // Add one more word because last word won't have a "\n"
     new_line_counter++;
 
-    printf("new lines (numberr of words): %u", new_line_counter);
+    printf("new lines (number of words): %u\n", new_line_counter);
     // ==== end ====
 
+    // Step 3: Declare array that is equal to size of words in dictionary
+   
     // Allocate enough memory to store 10 nodes
     node *list = malloc(DICTIONARYSIZE * sizeof(node));
 
-    if (list == NULL){return 1;} // good pract
+    if (list == NULL)
+    {
+        return 1;
+    } // good pract
 
     // read file into buffer (list) | returns an int
     fread(list, sizeof(char), 512, file);
-    
-    
-
+       
     free(list);
     fclose(file);
     return true;
